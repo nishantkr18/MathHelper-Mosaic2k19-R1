@@ -16,13 +16,12 @@ from sympy import sympify
 from time import sleep
 from sympy import Symbol, sympify, factor, plot, solve, sin, Limit, Derivative, init_printing
 from sympy import Integral, log
-# from mpmath import e
 
 p = Symbol('p')
 y = Symbol('y')
 z = Symbol('z')
 
-cp = cv2.VideoCapture(1)
+# cp = cv2.VideoCapture(0)
 
 def annotate(frame, label, location = (20,30)):
     cv2.putText(frame, label, location, cv2.FONT_HERSHEY_SIMPLEX,
@@ -76,26 +75,6 @@ def showPlot(frame_list):
         fig.add_subplot(size, size, i+1)
         plt.imshow(img)
     plt.show()
-def solve1(equation):
-    current = 0
-    equation2 = []
-    Dict = {10: '-', 11: '+', 12: '*'} 
-    for i in equation:
-        if(i<10):
-            current = current*10+i
-        elif(i<13):
-            equation2.append(current)
-            equation2.append(Dict[i])
-            current = 0
-    equation2.append(current)
-    # return equation2
-    s = ''
-    for i in equation2: s+=str(i)
-    print(s,'=>', sympify(s))
-    sleep(3)
-    exit()
-    return sympify(s)
-
 def solve2(equation, perform):
     global labelz
     current = 0
@@ -113,10 +92,7 @@ def solve2(equation, perform):
             current = 0
     if(flag == True):equation2.append(current)
     print(equation2)
-    # return
-
-    # equation2 = ['int','(','pi',')','+','y','*','8','*','*','2']
-    # equation2 = ['d','sin','(','y',')']
+    print()
 
     if ('int' in equation2):TypeOfEquation = 1
     elif('d' in equation2):TypeOfEquation = 2
@@ -126,35 +102,34 @@ def solve2(equation, perform):
 
     s = ''
     for i in equation2: s+=str(i)
-    print(TypeOfEquation, s)
+    # print(TypeOfEquation)
+    print('Recognized equation is :'+s)
 
     if(perform==False):return
 
+    print()
+    print('The Answer is :')
     if(TypeOfEquation == 1): 
         a = Integral(sympify(s[3:])).doit()
-        print(a)
+        print(str(a)+'\n\n'+'The Graph:')
         plot(a)
-        exit()
     elif(TypeOfEquation == 2): 
         a = Derivative(sympify(s[1:])).doit()
-        print(a)
+        print(str(a)+'\n\n'+'The Graph:')
         plot(a)
-        exit()
     elif(TypeOfEquation == 3): 
         if(s[6:8]=='oo'):a = Limit(sympify(s[8:]), sympify(s[3]), sympify(s[6:8])  ).doit()
         else : a = Limit(sympify(s[7:]), sympify(s[3]), sympify(s[6])  ).doit()
         print(a)
-        exit()
     elif(TypeOfEquation == 4):
         expr = sympify(s)
         print('factorized Expression => ', factor(expr))
         print('on Solving, We get => ',solve(expr))
+        print('The Graph of The Function :')
         plot(expr)
-        exit()
     elif(TypeOfEquation == 5):
         print(sympify(s))
         print('On further simplification => ', sympify(s).evalf())
-    exit()
 
 
     # return sympify(s)
@@ -165,10 +140,7 @@ print("loading model")
 model = load_model("full_model_onMyData.mnist")
 labelz = dict(enumerate(['0', '1','2','3','4','5','6','7','8','9','-','+','*','(',')','cos','d','E','oo','int','lim','log','p','pi','rA','sin','sqrt','tan','y','z']))
 
-while True:
-    ret, frame = cp.read()
-    frame = cv2.imread('Test_images/555diff.png')
-
+def process(frame, perform=True):
     gray_frame = img_to_gray(frame)
     contours,_ = cv2.findContours(cv2.bitwise_not(gray_frame.copy()), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     rects = [cv2.boundingRect(contour) for contour in contours]
@@ -187,7 +159,6 @@ while True:
             class_prediction = model.predict_classes(mnist_frame, verbose = False)[0]
             # prediction = np.around(np.max(model.predict(mnist_frame, verbose = False)), 2)
             # label = str(prediction) # if you want probabilities
-
             equation.append(class_prediction)
             cv2.rectangle(frame, (x - pad, y - pad), (x + pad + w, y + pad + h),
                           color = (255, 255, 0))
@@ -196,17 +167,19 @@ while True:
 
             annotate(frame, label, location = (rect[0], rect[1]))
 
+    # cv2.imshow('gray_frame', gray_frame)
+    # cv2.imshow('frame', frame)
+    # key = cv2.waitKey(0)
 
-    cv2.imshow('gray_frame', gray_frame)
-    cv2.imshow('frame', frame)
-    key = cv2.waitKey(50)
-    if key == ord('q'):
-        break
-    elif key == ord('p'):
-        showPlot(mnist_frame_list)
-    elif key == ord('s'):
-        solve2(equation, True)
-
-
-    solve2(equation, False)
+    # plt.imshow(gray_frame)
+    # plt.show()
+    plt.imshow(frame)
+    plt.show()
     
+    showPlot(mnist_frame_list)
+    solve2(equation, perform)
+
+if __name__ == '__main__':
+    # ret, frame = cp.read()
+    frame = cv2.imread('Test_images/555diff.png')
+    process(frame)

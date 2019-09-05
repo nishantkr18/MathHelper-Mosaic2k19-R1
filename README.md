@@ -2,7 +2,7 @@
 
 This is the code that won us Mosaic'19 (the Computer Vision event of [Udyam](https://www.facebook.com/udyamfest), the departmental fest of Electronics, [IIT(BHU) Varanasi](https://www.iitbhu.ac.in/)) Round1, during our first year.
 
-The [DEMO.ipynb](MathHelper-Mosaic2k19-R1/DEMO.ipynb) file shows the Project in action.
+The [DEMO.ipynb](https://github.com/nishantkr18/MathHelper-Mosaic2k19-R1/blob/master/DEMO.ipynb) file shows the Project in action.
 
 Here, you can solve for:
 * Derivatives

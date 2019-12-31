@@ -13,7 +13,12 @@ Here, you can solve for:
 The CNN model can detect and create bounding boxes around 30 different symbols:
 ['0', '1','2','3','4','5','6','7','8','9','-','+','*','(',')','cos','d','E','oo','int','lim','log','p','pi','rA','sin','sqrt','tan','y','z']
 
-Here are some examples of the images to be provided:
+### A demo showing Input Image and output response
+![Demo](https://github.com/nishantkr18/MathHelper-Mosaic2k19-R1/blob/master/Test_images/Output_demo.png)
+
+
+
+### Below are some examples of the images to be provided:
 ![To find derivatives](https://github.com/nishantkr18/MathHelper-Mosaic2k19-R1/blob/master/Test_images/555diff.png)
 
 ![To find Integrals](https://github.com/nishantkr18/MathHelper-Mosaic2k19-R1/blob/master/Test_images/555integ.png)
@@ -21,6 +26,3 @@ Here are some examples of the images to be provided:
 ![To find Limit](https://github.com/nishantkr18/MathHelper-Mosaic2k19-R1/blob/master/Test_images/555lim1.png)
 
 ![Simple calculator](https://github.com/nishantkr18/MathHelper-Mosaic2k19-R1/blob/master/Test_images/N1.jpeg)
-
-## Graphs of possible resulting equations are also displayed.
-

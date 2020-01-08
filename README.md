@@ -1,7 +1,5 @@
 # MathHelper-Mosaic2k19-R1
 
-This is the code that won us Mosaic'19 (the Computer Vision event of [Udyam](https://www.facebook.com/udyamfest), the departmental fest of Electronics, [IIT(BHU) Varanasi](https://www.iitbhu.ac.in/)) Round1, during our first year.
-
 The [DEMO.ipynb](https://github.com/nishantkr18/MathHelper-Mosaic2k19-R1/blob/master/DEMO.ipynb) file shows the Project in action.
 
 Here, you can solve for:
@@ -26,3 +24,5 @@ The CNN model can detect and create bounding boxes around 30 different symbols:
 ![To find Limit](https://github.com/nishantkr18/MathHelper-Mosaic2k19-R1/blob/master/Test_images/555lim1.png)
 
 ![Simple calculator](https://github.com/nishantkr18/MathHelper-Mosaic2k19-R1/blob/master/Test_images/N1.jpeg)
+
+This is the code that won us Mosaic'19 (the Computer Vision event of [Udyam](https://www.facebook.com/udyamfest), the departmental fest of Electronics, [IIT(BHU) Varanasi](https://www.iitbhu.ac.in/)) Round1, during our first year.
